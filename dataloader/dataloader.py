@@ -12,7 +12,7 @@ def load_dataloader(dataset='dsprites', path_to_data= '/home/hankyu/hankyu/disen
         
         if train:
             all_transforms = transforms.Compose([
-                transforms.Resize([size, size]),
+                transforms.Resize(size),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=(0.5),
                                     std=(0.5))
@@ -20,7 +20,7 @@ def load_dataloader(dataset='dsprites', path_to_data= '/home/hankyu/hankyu/disen
         
         else:
             all_transforms = transforms.Compose([
-                transforms.Resize([size, size]),
+                transforms.Resize(size),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=(0.5),
                                     std=(0.5))
@@ -34,8 +34,8 @@ def load_dataloader(dataset='dsprites', path_to_data= '/home/hankyu/hankyu/disen
         all_transforms = transforms.Compose([
             transforms.Resize([size, size]),
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5],
-                                std=[0.5, 0.5, 0.5])
+            transforms.Normalize(mean=(0.5),
+                                std=(0.5))
             
         ])
         Data_Set = CustumData(path_to_data= path_to_data,nc=nc, train = train, transforms = all_transforms)

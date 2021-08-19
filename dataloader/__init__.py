@@ -1,2 +1,2 @@
-from custum_data import *
-from dataloader import *
+from .custum_data import *
+from .dataloader import *

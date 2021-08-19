@@ -10,9 +10,9 @@ from training.training import Trainer
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-import gc
-gc.collect()
-torch.cuda.empty_cache()
+# import gc
+# gc.collect()
+# torch.cuda.empty_cache()
 
 # Get config file from command line arguments
 if len(sys.argv) != 2:
@@ -40,7 +40,7 @@ if config["train"] > 0:
 else:
     directory = config["test"]["test_path"]
 
-
+cudnn.enabled = True
 cudnn.benchmark = True
 
 if config["dataset"] == "dsprites":
@@ -79,13 +79,14 @@ trainer = Trainer(device,
                 ngf = config["ngf"],
                 ndf = config["ndf"],
                 nc = config["nc"],
+                weight_init = config["weight_init"],
                 max_iters = training["max_iters"],
                 noise_iters = training["noise_iters"],
                 resume_iters = training["resume_iters"],
                 restored_model_path = training["restored_model_path"],
-                lr_E = training["lr_E"],
+                lr_E = training["lr_G"],
                 lr_G = training["lr_G"],
-                lr_Q = training["lr_Q"],
+                lr_Q = training["lr_G"],
                 lr_D = training["lr_D"],
                 weight_decay = training["weight_decay"],
                 beta1 = training["beta1"],
@@ -94,6 +95,10 @@ trainer = Trainer(device,
                 scheduler_gamma = training["scheduler_gamma"],
                 gan_loss_type = training["gan_loss_type"],
                 opt_type = training["opt_type"],
+                label_smoothing = training["label_smoothing"],
+                instance_noise = training["instance_noise"],
+                noise_start = training["noise_start"],
+                noise_end = training["noise_end"],
                 start = start,
                 end = end,
                 steps = steps,

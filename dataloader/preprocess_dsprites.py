@@ -8,7 +8,7 @@ save_path = "../data/dsprites"
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 
-data = np.load(root, encoding='latin1')
+data = np.load(data_path, encoding='latin1')
 data = torch.from_numpy(data['imgs']).unsqueeze(1).float()
 
 for i in range(data.size(0)):

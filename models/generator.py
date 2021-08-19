@@ -5,22 +5,35 @@ from models import BaseModel
 from models.utils import *
 
 class Generator(BaseModel):
-    def __init__(self, ngf, nc, z_dim, r_dim):
+    def __init__(self, ngf, nc, z_dim, r_dim, weight_init):
         super(Generator, self).__init__()
+        # self.dataset = dataset
         self.ngf= ngf
         self.nc = nc
         self.z_dim = z_dim
         self.r_dim = r_dim
         
-        self.r = nn.Sequential(
-            nn.Linear(z_dim, ngf*2),
-            nn.BatchNorm1d(ngf*2),
-            nn.ReLU(),
-            nn.Linear(ngf*2, ngf),
-            nn.BatchNorm1d(ngf),
-            nn.ReLU(),
-            nn.Linear(ngf, r_dim*2)
-        )
+        if ngf <= 16:
+            self.r = nn.Sequential(
+                nn.Linear(z_dim, 32),
+                nn.ReLU(),
+                nn.Linear(32, 32),
+                nn.ReLU(),
+                nn.Linear(32, r_dim*2),
+                )
+        else:
+            self.r = nn.Sequential(
+                nn.Linear(z_dim, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Linear(64, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Linear(64, 32),
+                nn.BatchNorm1d(32),
+                nn.ReLU(),
+                nn.Linear(32, r_dim*2),
+            )
 
         self.r_to_g = nn.Sequential(
             nn.Linear(r_dim, ngf*16),
@@ -33,19 +46,19 @@ class Generator(BaseModel):
         )
 
         self.g = nn.Sequential(
-            nn.Conv2d(ngf*4, ngf*4, kernel_size=3, stride=1, padding=1),
+            nn.ConvTranspose2d(ngf*4, ngf*4, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(ngf*4),
             nn.ReLU(),
 
-            nn.Conv2d(ngf*4, ngf*4, kernel_size=3, stride=1, padding=1),
+            nn.ConvTranspose2d(ngf*4, ngf*4, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(ngf*4),
             nn.ReLU(),
             
-            nn.ConvTranspose2d(ngf*4, ngf*2, kernel_size= 4, stride=2, padding= 1),
+            nn.ConvTranspose2d(ngf*4, ngf*2, kernel_size= 4, stride=2, padding=1 , bias=False),
             nn.BatchNorm2d(ngf*2),
             nn.ReLU(),
 
-            nn.ConvTranspose2d(ngf*2, ngf, kernel_size= 4, stride=2, padding=1),
+            nn.ConvTranspose2d(ngf*2, ngf, kernel_size= 4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(ngf),
             nn.ReLU(),
 
@@ -53,7 +66,7 @@ class Generator(BaseModel):
             nn.Tanh()
         )
 
-        self.weight_init()
+        self.weight_init(weight_init)
     
     def forward_r(self, z):
         B, _ = z.size()
@@ -67,7 +80,7 @@ class Generator(BaseModel):
         B, _ = r.size()
         input = self.r_to_g(r)
         input = input.view(B, -1, 8, 8)
-        out = self.g(r)
+        out = self.g(input)
         return out
     
     def forward(self, z):

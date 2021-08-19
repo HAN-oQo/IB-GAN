@@ -17,7 +17,7 @@ class CustumData(data.Dataset):
         
     def prepare(self):
         for img in os.listdir(self.path_to_data):
-            self.data.append(os.path.join(self.data, img))
+            self.data.append(os.path.join(self.path_to_data, img))
         
 
     def __getitem__(self, index) :
