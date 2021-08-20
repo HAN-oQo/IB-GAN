@@ -3,7 +3,7 @@
     "model": "IBGAN",
     "dataset": "celeba",
     "path_to_data": "./data/celeba/images",
-    "train" : 1,  
+    "train" : 0,  
     "resolution": 64,
     "z_dim": 64,
     "r_dim": 15,
@@ -42,12 +42,12 @@
         "model_save_freq": 5000
     },
     "test":{
-        "test_iters": 50000,
+        "test_iters": 1e6,
         "batch_size" : 1,
         "test_seed" : [42, 62, 1024, 72, 92] ,
         "start": -3.0,
         "end": 3.0,
         "steps": 10,
-        "test_path": ""
+        "test_path": "/home/hankyu/hankyu/disentangle/ibgan/2021-08-19_21-08_IBGAN-celeba"
     }
 }

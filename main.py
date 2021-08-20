@@ -43,7 +43,7 @@ else:
 cudnn.enabled = True
 cudnn.benchmark = True
 
-if config["dataset"] == "dsprites":
+if config["dataset"] == "dsprites" or config["dataset"] == "celeba" or config["dataset"] == "3dchairs":
     path_to_data = config["path_to_data"]
     resolution = config["resolution"]
     training = config["training"]

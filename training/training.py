@@ -417,7 +417,7 @@ class Trainer():
         # Disentangling Score, FID Score Calculation Implementation needed            #
         # Almost same code with generating smaples while training network             #   
         ###############################################################################
-        self.load_model(self.test_path, self.test_iters)
+        self.load_model(self.model_save_dir, self.test_iters)
         with torch.no_grad():
 
             z_list = []
@@ -433,8 +433,8 @@ class Trainer():
                 z_list.append(z)
                 r_list.append(r)
 
-            test_z = torch.stack(z_list, dim=0)
-            test_r = torch.stack(r_list, dim=0)
+            test_z = torch.stack(z_list, dim=0).to(self.device)
+            test_r = torch.stack(r_list, dim=0).to(self.device)
             r_from_z, _ , _, _ = self.G(test_z)
             for d in range(self.r_dim):
                 img0 = self.G.traverse_latents(self.device, r_from_z, d, start = self.start, end = self.end, steps = self.steps)

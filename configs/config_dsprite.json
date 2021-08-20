@@ -42,12 +42,12 @@
         "model_save_freq": 5000
     },
     "test":{
-        "test_iters": 50000,
+        "test_iters": 150000,
         "batch_size" : 1,
-        "test_seed" : [42, 62, 1024, 72, 92] ,
-        "start": -3.0,
-        "end": 3.0,
+        "test_seed" : [0, 1, 70,71,72,73,74,75,76,88,76] ,
+        "start": -6.0,
+        "end": 6.0,
         "steps": 10,
-        "test_path": ""
+        "test_path": "/home/hankyu/hankyu/disentangle/ibgan/2021-08-19_19-52_IBGAN-dsprites/"
     }
 }

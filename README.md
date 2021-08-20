@@ -44,7 +44,6 @@ for 3D Chairs
 ```
 # Download 3D Chairs dataset
 sudo bash download.sh CelebA
-
 ```
 ---
 ## Train/Test Network
@@ -115,10 +114,29 @@ In *configs* directory, there are configs files I used for each dataset.
 ---
 ## Sample Results
 ### 1. Dsprites
+|Attribute|Latent Traversal Result|
+|------|---|
+|PosX|![dsprite_posx](./imgs/dsprite-posx.jpg)|
+|PosY|![dsprite_posy](./imgs/dsprite-posy.jpg)|
+|Scale|![dsprite_scale](./imgs/dsprite-scale.jpg)|
+|Rotation|![dsprite_rotation](./imgs/dsprite-rotation.jpg)|
+|Shape|![dsprite_shape](./imgs/dsprite-shape.jpg)|
 
 ### 2. CelebA
-
+|Attribute|Latent Traversal Result|
+|------|---|
+|Azimuth|![celeba_azimuth](./imgs/celeba-azimuth.jpg)|
+|Hair Color|![celeba-haircolor](./imgs/celeba-haircolor.jpg)|
+|Smile|![celeba-smile](./imgs/celeba-smile.jpg)|
+|Background|![celeba-background](./imgs/celeba-background.jpg)|
+|Skintone|![celeba-skintone](./imgs/celeba-skintone.jpg)|
+|Gender|![celeba-gender](./imgs/celeba-gender.jpg)|
 ### 3. 3D Chairs
+|Attribute|Latent Traversal Result|
+|---|---|
+|Scale|![3dchairs-scale](./imgs/3dchairs-scale.jpg)|
+|Leg|![3dchairs-legs](./imgs/3dchairs-legs.jpg)|
+|Azimuth|![3dchairs-azimuth](./imgs/3dchairs-azimuth.jpg)|
 
 
 ---

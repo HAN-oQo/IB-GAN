@@ -2,7 +2,7 @@
     "id": "IBGAN-3dchairs",
     "model": "IBGAN",
     "dataset": "3dchairs",
-    "path_to_data": "./data/3DChairs",
+    "path_to_data": "./data/3DChairs/images",
     "train" : 1,  
     "resolution": 64,
     "z_dim": 64,
