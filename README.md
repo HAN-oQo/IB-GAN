@@ -140,6 +140,8 @@ In *configs* directory, there are configs files I used for each dataset.
 
 
 ---
+## Pretrained Models
+Pretrained models for 3 datasets are available: [here](https://drive.google.com/drive/folders/1IPHoHfS8-_8ek2NnmrI6fuFpOkgr3Dbk?usp=sharing)
 
 ## Acknowledgement
 I appreciate the helps from the author of the paper, Insu Jeon(insuj3on@gmail.com)
